@@ -104,16 +104,16 @@ let gameStarted = false;
 
 function preload() {
     loadBackgroundMusic();
-    fruitsdata[0].image = loadImage('./img/level0.png');
-    fruitsdata[1].image = loadImage('./img/level1.png');
-    fruitsdata[2].image = loadImage('./img/level2.png');
-    fruitsdata[3].image = loadImage('./img/level3.png');
-    fruitsdata[4].image = loadImage('./img/level4.png');
-    fruitsdata[5].image = loadImage('./img/level5.png');
-    fruitsdata[6].image = loadImage('./img/level6.png');
-    fruitsdata[7].image = loadImage('./img/level7.png');
-    fruitsdata[8].image = loadImage('./img/level8.png');
-    fruitsdata[9].image = loadImage('./img/level9.png');
+    fruitsdata[0].image = loadImage('/Crypto-Fusion-Frenzy/img/level0.png');
+    fruitsdata[1].image = loadImage('/Crypto-Fusion-Frenzy/img/level1.png');
+    fruitsdata[2].image = loadImage('/Crypto-Fusion-Frenzy/img/level2.png');
+    fruitsdata[3].image = loadImage('/Crypto-Fusion-Frenzy/img/level3.png');
+    fruitsdata[4].image = loadImage('/Crypto-Fusion-Frenzy/img/level4.png');
+    fruitsdata[5].image = loadImage('/Crypto-Fusion-Frenzy/img/level5.png');
+    fruitsdata[6].image = loadImage('/Crypto-Fusion-Frenzy/img/level6.png');
+    fruitsdata[7].image = loadImage('/Crypto-Fusion-Frenzy/img/level7.png');
+    fruitsdata[8].image = loadImage('/Crypto-Fusion-Frenzy/img/level8.png');
+    fruitsdata[9].image = loadImage('/Crypto-Fusion-Frenzy/img/level9.png');
 
 }
 
