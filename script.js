@@ -102,19 +102,17 @@ let musicPlaying = true;
 
 let gameStarted = false;
 
+let isGameOver = false;
+let gameOverMessage = "";
+
 function preload() {
     loadBackgroundMusic();
-    fruitsdata[0].image = loadImage('./img/level0.png');
-    fruitsdata[1].image = loadImage('./img/level1.png');
-    fruitsdata[2].image = loadImage('./img/level2.png');
-    fruitsdata[3].image = loadImage('./img/level3.png');
-    fruitsdata[4].image = loadImage('./img/level4.png');
-    fruitsdata[5].image = loadImage('./img/level5.png');
-    fruitsdata[6].image = loadImage('./img/level6.png');
-    fruitsdata[7].image = loadImage('./img/level7.png');
-    fruitsdata[8].image = loadImage('./img/level8.png');
-    fruitsdata[9].image = loadImage('./img/level9.png');
-
+    for (let i = 0; i < fruitsdata.length; i++) {
+        fruitsdata[i].image = loadImage('./img/level' + i + '.png', 
+            () => console.log(`Image ${i} loaded`),
+            () => console.log(`Failed to load image ${i}`)
+        );
+    }
 }
 
 function setup() {
@@ -163,13 +161,14 @@ function setup() {
 
     // Add this at the end of the setup function
     updateMusicButton();
+    console.log("Setup complete");
 }
 
 function draw() {
-    background(220);
+    console.log("Draw function called, gameStarted:", gameStarted);
     
     if (!gameStarted) {
-        // Display a message or loading screen here if needed
+        console.log("Game not started yet");
         return;
     }
 
@@ -209,15 +208,18 @@ function draw() {
 
     // if fruits are getting closer draw the line
     if (findObjectWithLowestY(fruits) < 150) {
-        // gameover
-        // disable controls
-        // playing = false
-        // show gae over message
-
+        gameOver("Game Over: Fruits too high!");
     }
 
+    // Draw the dashed line
+    drawDashedLine();
 
+    if (isGameOver) {
+        displayGameOver();
+        return;
+    }
 
+    Engine.update(engine);
 }
 
 function movehand() {
@@ -431,7 +433,47 @@ function toggleMusic() {
 // Add this function to start the game
 function startGame() {
     gameStarted = true;
+    isGameOver = false;
     Runner.run(runner, engine);
     playBackgroundMusic(); // Start the music when the game starts
     loop(); // Ensure the draw loop is running
+    console.log("Game started"); // Add this line for debugging
+}
+
+function gameOver(message) {
+    isGameOver = true;
+    gameOverMessage = message;
+    stopBackgroundMusic(); // Stop the music when game is over
+    noLoop(); // Stop the draw loop
+}
+
+function displayGameOver() {
+    background("#EAC696");
+    fill("#765827");
+    textAlign(CENTER, CENTER);
+    textSize(32);
+    text(gameOverMessage, width / 2, height / 2 - 50);
+    textSize(24);
+    text("Final Score: " + score, width / 2, height / 2 + 50);
+    
+    // Add a restart button
+    let restartButton = createButton('Restart Game');
+    restartButton.position(width / 2 - 50, height / 2 + 100);
+    restartButton.mousePressed(restartGame);
+}
+
+function restartGame() {
+    isGameOver = false;
+    score = 0;
+    fruits = [];
+    assignfruitinhand();
+    playBackgroundMusic();
+    loop();
+    // Remove the restart button
+    let buttons = selectAll('button');
+    for (let i = 0; i < buttons.length; i++) {
+        if (buttons[i].html() === 'Restart Game') {
+            buttons[i].remove();
+        }
+    }
 }
