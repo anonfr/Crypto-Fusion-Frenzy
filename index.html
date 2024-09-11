@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Fusion Frenzy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.8.0/p5.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.8.0/addons/p5.sound.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #musicControls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        #startScreen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #EAC696; /* Change this to match your desired background color */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        #startScreen h1 {
+            color: #765827; /* Change this to your desired text color */
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        #playNowBtn {
+            font-size: 1.5em;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="startScreen">
+        <h1>Crypto Fusion Frenzy</h1>
+        <button id="playNowBtn" class="btn btn-success">Play Now</button>
+    </div>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-3 "></div>
+            <div id="maincol" class="col-md-6">
+                <nav class="navbar bg-body-tertiary" data-bs-theme="dark">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="#">Crypto Fusion Frenzy</a>
+                    </div>
+                </nav>
+                <div id="canvasbox"></div>
+            </div>
+
+            <div class="col-md-3 "></div>
+
+        </div>
+    </div>
+
+    <!-- Replace the existing music controls div with this -->
+    <div id="musicControls">
+        <button id="toggleMusic" class="btn btn-primary">Music: Off</button>
+    </div>
+
+    <!-- Add p5.sound.js before your custom scripts -->
+    <script src="sound.js"></script>
+    <script src="fruit.js"></script>
+    <script src="ground.js"></script>
+    <script src="script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('playNowBtn').addEventListener('click', () => {
+                document.getElementById('startScreen').style.display = 'none';
+                startGame();
+            });
+            document.getElementById('toggleMusic').addEventListener('click', toggleMusic);
+        });
+    </script>
+
+    <!-- Add this just before the closing </body> tag -->
+    <div id="loadingMessage" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 24px;">
+    </div>
+</body>
+
+</html>
